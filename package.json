@@ -1,0 +1,25 @@
+{
+  "name": "ChatIPv6",
+  "version": "1.0.0",
+  "description": "Chat hecho en node.js y nw.js utilizando IPv6 para la comunicación entre  personas",
+  "main": "index.js",
+  "scripts": {
+    "test": "init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/walis85300/ChatIPv6.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "ipv6",
+    "nw.js"
+  ],
+  "author": "walis85300, calosth, romjear12, DanielRS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/walis85300/ChatIPv6/issues"
+  },
+  "homepage": "https://github.com/walis85300/ChatIPv6"
+}
