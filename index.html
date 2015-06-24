@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chat Js</title>
+</head>
+    <meta charset="utf-8">
+    <title>Bootstrap Material</title>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+<body>
+
+<div style="display: block;" class="" id="navbar">
+
+	<div class="navbar navbar-inverse">
+	<div class="navbar-header">
+	  <div class="navbar-brand">LatinChat IPv6 <i class="mdi-communication-textsms"></i></div>
+	</div>
+
+	</div>
+
+	</div>
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 all-height b-white">
+				<div class="bs-component">
+			        <div class="list-group">
+			        	<div class="sidebar">
+				            <div class="list-group-item">
+				                <div class="row-picture">
+				                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+				                </div>
+				                <div class="row-content">
+				                    <h4 class="list-group-item-heading">Romer</h4>
+				                    <p class="list-group-item-text text-muted">Donec id elit non mi porta gravida at eget metus</p>
+				                </div>
+				            </div>
+				            <div class="list-group-separator"></div>
+				            <div class="list-group-item">
+				                <div class="row-picture">
+				                    <img class="circle" src="http://lorempixel.com/56/56/people/6" alt="icon">
+				                </div>
+				                <div class="row-content">
+				                    <h4 class="list-group-item-heading">David</h4>
+				                    <p class="list-group-item-text text-muted">Maecenas sed diam eget risus varius blandit.</p>
+				                </div>
+				            </div>
+				            <div class="list-group-separator"></div>
+				            <div class="list-group-item">
+				                <div class="row-picture">
+				                    <img class="circle" src="http://lorempixel.com/56/56/people/7" alt="icon">
+				                </div>
+				                <div class="row-content">
+				                    <h4 class="list-group-item-heading">Team 1</h4>
+				                    <p class="list-group-item-text text-muted">lorem ipsum</p>
+				                </div>
+				                <i class="mdi-social-people pull-right"></i>
+				            </div>
+				            <div class="list-group-separator"></div>
+				            <div class="list-group-item list-group-item-active">
+				                <div class="row-picture">
+				                    <img class="circle" src="http://lorempixel.com/56/56/people/9" alt="icon">
+				                </div>
+				                <div class="row-content">
+				                    <h4 class="list-group-item-heading">Sandra</h4>
+				                    <p class="list-group-item-text text-muted">Maecenas sed diam eget risus varius blandit.</p>
+				                </div>
+				            </div>
+				            <div class="list-group-separator"></div>				            				            
+				        </div>	            
+			        </div>	
+			    </div>
+			</div>
+			<div id="-main" class="col-xs-8">
+				<div class="box-messages">
+						<div class="bs-component">
+                            <div class="alert alert-dismissable alert-danger float-left">
+                                Hi, how you doing!  adjsdhkjas
+                            </div>
+						</div>		
+						<div class="bs-component">
+                            <div class="alert alert-dismissable alert-info float-right">
+                                I'm ok and you?  das
+                            </div>
+						</div>	
+						<div class="bs-component">
+                            <div class="alert alert-dismissable alert-danger float-left">
+                                Hi, how you doing!  adjsdh da kjas das dasl dkajslk dnalks dlkaskldjalk sdaslk adlk
+                                   a
+                            </div>
+						</div>		
+						<div class="bs-component">
+                            <div class="alert alert-dismissable alert-info float-right">
+                                I'm ok and you?  das dajks dkja sdka sd akjsd ajksdk; a;sd;a s;d;aks d;kak;s d;ka dks ;;ak sdk; as d;ka sk;dak; sdk; ask;d;ka  dakjsdjasd
+
+                            </div>
+						</div>								
+														
+				</div>
+				<div>
+					<div class="form-group">
+	                    <div class="input-group b-white">
+	                        <span class="input-group-addon">></span>
+	                        <input class="form-control" type="text">
+	                        <span class="input-group-btn">
+	                            <button class="btn btn-success" type="button">Send</button>
+	                        </span>
+	                    </div>
+	                </div>
+	            </div>
+			</div>
+		</div>
+	</div>
+<!-- Templates  -->
+	<script id="bubble-me" type="text/x-handlebars-template">
+		<div class="bs-component">
+            <div class="alert alert-dismissable alert-info float-right">
+            	{{ message }}
+
+            </div>
+		</div>	
+	</script>
+
+	<script id="bubble-other" type="text/x-handlebars-template">
+		<div class="bs-component">
+            <div class="alert alert-dismissable alert-danger float-left">
+				{{ message }}
+            </div>
+		</div>	
+	</script>	
+
+	<script id="template-box-messages" type="text/x-handlebars-template">
+		<div class="box-messages">
+			{{ messages }}						
+		</div>
+		<div>
+			<div class="form-group">
+                <div class="input-group b-white">
+                    <span class="input-group-addon">></span>
+                    <input class="form-control" type="text">
+                    <span class="input-group-btn">
+                        <button class="btn btn-success" type="button">Send</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+	</script>	
+	<script type="text/javascript" src="bower_components/handlebars/handlebars.js"></script>
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+
+</body>
+</html>

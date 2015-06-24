@@ -1,0 +1,30 @@
+{
+  "name": "chatIPv6",
+  "version": "0.0.0",
+  "authors": [
+    "Carlos",
+    "Daniel",
+    "Eduardo",
+    "Romer"
+  ],
+  "description": "A simple chat over IPv6",
+  "main": "index.html",
+  "keywords": [
+    "chat",
+    "ipv6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-material-design": "~0.3.0",
+    "handlebars": "~3.0.3",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  }
+}

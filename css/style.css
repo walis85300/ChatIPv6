@@ -1,0 +1,62 @@
+/* Utils */
+body{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.navbar-brand{
+	cursor: default;
+}
+
+.box-messages {
+	height: 450px;
+	margin-left: 12px;
+}
+
+.b-white{
+	background: white;	
+}
+
+
+.list-group{
+	margin-top: 10px;
+}
+.all-height{
+	height: 528px;
+	margin-top: -19px;
+}
+
+.bs-component{
+	display: block;
+	clear: both;
+	
+}
+.float-left{
+	float: left;	
+}
+
+.float-right{
+	float: right;
+}
+.float-right,.float-left{
+	max-width: 70%;
+}
+
+.alert{
+	display: inline-block;
+	box-shadow: 0px 8px 17px 0px rgba(0, 0, 0, 0.1), 0px 6px 20px 0px rgba(0, 0, 0, 0.14);	
+}
+
+.list-group-item:hover{
+	background: whitesmoke;
+	cursor: pointer;	
+}
+
+.list-group-item-active{
+	background: whitesmoke !important;
+}
+
