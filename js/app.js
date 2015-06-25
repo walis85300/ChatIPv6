@@ -7,6 +7,8 @@ var _arrayConversations = [
 // Converstaion 1
 	{
 		'uuid': 'aaa-bbb-ccc-1',
+		'urlAvatar': 'http://lorempixel.com/56/56/people/1',
+		'alias': 'Sandra',
 		'messages': [
 			{ 
 				'who': 0,
@@ -27,6 +29,8 @@ var _arrayConversations = [
 	},
 	{
 		'uuid': 'aaa-bbb-ccc-2',
+		'urlAvatar': 'http://lorempixel.com/56/56/people/3',		
+		'alias': 'Daniel',
 		'messages': [
 			{ 
 				'who': 1,
@@ -82,6 +86,8 @@ var _arrayConversations = [
 	},
 	{
 		'uuid': 'aaa-bbb-ccc-3',
+		'urlAvatar': 'http://lorempixel.com/56/56/people/4',		
+		'alias': 'David',
 		'messages': [
 			{ 
 				'who': 0,
@@ -102,6 +108,8 @@ var _arrayConversations = [
 	},	
 	{
 		'uuid': 'aaa-bbb-ccc-4',
+		'urlAvatar': 'http://lorempixel.com/56/56/people/7',		
+		'alias': 'Mario',
 		'messages': [
 			{ 
 				'who': 1,
@@ -137,7 +145,7 @@ var _arrayConversations = [
 //
 // --------------------
 var _context = {
-	'uuidContext': ''
+	'uuidContext': 'aaa-bbb-ccc-1'
 }
 function searhConversation(uuid) {
 	for (var i = 0; i < _arrayConversations.length; i++) {
@@ -170,35 +178,51 @@ function renderMessages(messages){
 	$('#box-main').html(htmlMessages);
 };
 
+function renderConversations(conversations){
+	var html = $('#conversations');
+	$('#box-conversations').html(_render({'conversations':conversations}, html));
+};
+
 // --------------------
 //
 // 		UI 
 //
 // --------------------
 
-$('.list-group-item').click(function(event) {
-	var _uuid = $(this).data().uuid
+function addEventClick() {
+	$('.list-group-item').click(function(event) {
+		var _uuid = $(this).data().uuid
 
-	// Change context
-	_context.uuidContext = _uuid;
+		// Change context
+		_context.uuidContext = _uuid;
 
-	// Just validating
-	if (event.currentTarget === this){
-		// console.log(_uuid);
-		var id = searhConversation(_uuid);
+		// Just validating
+		if (event.currentTarget === this){
+			// console.log(_uuid);
+			var id = searhConversation(_uuid);
 
-		var messages = _arrayConversations[id].messages;
-		
-		// Render heree
-		renderMessages(messages);
+			var messages = _arrayConversations[id].messages;
+			
+			// Render heree
+			renderMessages(messages);
 
-	}
+		}
 
-});
+	});
+};
+
+function removeEventClick() {
+	$('.list-group-item').off();
+};
 
 $('#btn-send').click(function(event){
 	var message = $('#input-message').text();
 	$('#input-message').val('');
+	
+	renderConversations(_arrayConversations);
 
-	alert(_context.uuidContext);
+	// alert(_context.uuidContext);
 });
+
+removeEventClick();
+addEventClick();
