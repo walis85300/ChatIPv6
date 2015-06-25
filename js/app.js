@@ -1,4 +1,5 @@
 // --------------------------
+// Copyright
 // Who property for the sender 0 me 1 other
 
 // Example array with chats
@@ -44,14 +45,39 @@ var _arrayConversations = [
 			},
 			{ 
 				'who': 1,
-				'message': 'how you doing? ads das',
+				'message': 'how you doing? ads das das das',
 				'time': '12:03pm'
 			},
 			{ 
 				'who': 0,
 				'message': 'just waking up das das das',
 				'time': '12:03pm'
-			}						
+			},
+			{ 
+				'who': 1,
+				'message': 'how you doing? ads das das das',
+				'time': '12:03pm'
+			},
+			{ 
+				'who': 0,
+				'message': 'Hello! dasd asd',
+				'time': '12:02pm'
+			},
+			{ 
+				'who': 0,
+				'message': 'Hello! dasd asd',
+				'time': '12:02pm'
+			},
+			{ 
+				'who': 1,
+				'message': 'how you doing? ads das das das',
+				'time': '12:03pm'
+			},
+			{ 
+				'who': 0,
+				'message': 'just waking up das das das',
+				'time': '12:03pm'
+			}								
 		]
 	},
 	{
@@ -73,9 +99,46 @@ var _arrayConversations = [
 				'time': '12:03pm'
 			}						
 		]
+	},	
+	{
+		'uuid': 'aaa-bbb-ccc-4',
+		'messages': [
+			{ 
+				'who': 1,
+				'message': 'how you doing? ads das das das',
+				'time': '12:03pm'
+			},
+			{ 
+				'who': 0,
+				'message': 'Hello! dasd asd',
+				'time': '12:02pm'
+			},
+			{ 
+				'who': 0,
+				'message': 'Hello! dasd asd',
+				'time': '12:02pm'
+			},
+			{ 
+				'who': 1,
+				'message': 'how you doing? ads das das das',
+				'time': '12:03pm'
+			},
+			{ 
+				'who': 0,
+				'message': 'just waking up das das das',
+				'time': '12:03pm'
+			}						
+		]
 	},		
 ];
-
+// --------------------
+//
+// 		Utils
+//
+// --------------------
+var _context = {
+	'uuidContext': ''
+}
 function searhConversation(uuid) {
 	for (var i = 0; i < _arrayConversations.length; i++) {
 		console.log(_arrayConversations[i].uuid);
@@ -85,27 +148,39 @@ function searhConversation(uuid) {
 	return null;
 };
 
-function render(messages){
+function _render(context, htmlTarget){
+	var source = htmlTarget.html();
+	var template = Handlebars.compile(source);
+	return template(context);
+
+};
+
+function renderMessages(messages){
 	var htmlMessages = ''
 	var message;
+
 	for (var i = 0; i < messages.length; i++) {
 		if (messages[i].who === 0)
-			message = $('#bubble-me').html();
+			message = $('#bubble-me');
 		else 
-			message = $('#bubble-other').html();
-
-		var template = Handlebars.compile(message);
-		var context = messages[i];
-		htmlMessages += template(context);
-		
-		// console.log(htmlMessage);
+			message = $('#bubble-other');
+		htmlMessages += _render(messages[i],message);		
 	}
 
 	$('#box-main').html(htmlMessages);
 };
 
-$('.list-group-item').click( function(event) {
+// --------------------
+//
+// 		UI 
+//
+// --------------------
+
+$('.list-group-item').click(function(event) {
 	var _uuid = $(this).data().uuid
+
+	// Change context
+	_context.uuidContext = _uuid;
 
 	// Just validating
 	if (event.currentTarget === this){
@@ -115,8 +190,15 @@ $('.list-group-item').click( function(event) {
 		var messages = _arrayConversations[id].messages;
 		
 		// Render heree
-		render(messages);
+		renderMessages(messages);
 
 	}
 
+});
+
+$('#btn-send').click(function(event){
+	var message = $('#input-message').text();
+	$('#input-message').val('');
+
+	alert(_context.uuidContext);
 });

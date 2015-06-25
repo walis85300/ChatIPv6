@@ -61,7 +61,7 @@
 				                <i class="mdi-social-people pull-right"></i>
 				            </div>
 				            <div class="list-group-separator"></div>
-				            <div class="list-group-item list-group-item-active" data-uuid="aaa-bbb-ccc-4 ">
+				            <div class="list-group-item list-group-item-active" data-uuid="aaa-bbb-ccc-4">
 				                <div class="row-picture">
 				                    <img class="circle" src="http://lorempixel.com/56/56/people/9" alt="icon">
 				                </div>
@@ -75,8 +75,8 @@
 			        </div>	
 			    </div>
 			</div>
-			<div id="box-main" class="col-xs-8">
-				<div class="box-messages">
+			<div  class="col-xs-8">
+				<div id="box-main" class="box-messages">
 						<div class="bs-component">
                             <div class="alert alert-dismissable alert-danger float-left">
                                 Hi, how you doing!  adjsdhkjas
@@ -105,9 +105,9 @@
 					<div class="form-group">
 	                    <div class="input-group b-white">
 	                        <span class="input-group-addon">></span>
-	                        <input class="form-control" type="text">
+	                        <input id="input-message" class="form-control" type="text">
 	                        <span class="input-group-btn">
-	                            <button class="btn btn-success" type="button">Send</button>
+	                            <button id="btn-send" class="btn btn-success" type="button">Send</button>
 	                        </span>
 	                    </div>
 	                </div>
@@ -132,22 +132,16 @@
             </div>
 		</div>	
 	</script>	
-
-	<script id="template-box-messages" type="text/x-handlebars-template">
-		<div class="box-messages">
-			{{ messages }}						
+	<script id="conversation" type="text/x-handlebars-template">
+		<div class="list-group-item list-group-item-active" data-uuid="aaa-bbb-ccc-4">
+		    <div class="row-picture">
+		        <img class="circle" src="{{ url_avatar }}" alt="icon">
+		    </div>
+		    <div class="row-content">
+		        <h4 class="list-group-item-heading">{{ name }}</h4>
+		        <p class="list-group-item-text text-muted">Maecenas sed diam eget risus varius blandit.</p>
+		    </div>
 		</div>
-		<div>
-			<div class="form-group">
-                <div class="input-group b-white">
-                    <span class="input-group-addon">></span>
-                    <input class="form-control" type="text">
-                    <span class="input-group-btn">
-                        <button class="btn btn-success" type="button">Send</button>
-                    </span>
-                </div>
-            </div>
-        </div>
 	</script>
 
 	<script type="text/javascript" src="bower_components/handlebars/handlebars.js"></script>

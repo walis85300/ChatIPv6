@@ -15,6 +15,7 @@ body{
 .box-messages {
 	height: 450px;
 	margin-left: 12px;
+	overflow: scroll;
 }
 
 .b-white{
@@ -28,6 +29,7 @@ body{
 .all-height{
 	height: 528px;
 	margin-top: -19px;
+	overflow: scroll;
 }
 
 .bs-component{
