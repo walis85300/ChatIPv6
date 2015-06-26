@@ -46,7 +46,10 @@
 			        <div class="list-group">
 			        	<div id="box-conversations" class="sidebar">
 							<p class="text-center">Nobody here :(</p>			            				            
-				        </div>	            
+				        </div>	 
+			        	<div id="box-group-conversations" class="sidebar">
+							<p class="text-center">Nobody here :(</p>			            				            
+				        </div>	               
 			        </div>	
 			    </div>
 			</div>
@@ -90,6 +93,7 @@
 	</script>	
 	<script id="conversations" type="text/x-handlebars-template">
 		{{#each conversations}}
+			<div class="list-group-separator"></div>
 			<div class="list-group-item" data-uuid="{{this.id}}">
 			    <div class="row-picture">
 			        <img class="circle" src="{{ this.urlAvatar }}" alt="icon">
@@ -98,6 +102,21 @@
 			        <h4 class="list-group-item-heading">{{ this.data.alias }}</h4>
 			        <p class="list-group-item-text text-muted">{{ this.data.channel.address }}</p>
 			    </div>
+			</div>
+			<div class="list-group-separator"></div>
+		{{/each}}
+	</script>
+	<script id="group-conversations" type="text/x-handlebars-template">
+		{{#each conversations}}
+			<div class="list-group-item" data-uuid="{{this.uuid}}">
+			    <div class="row-picture">
+			        <img class="circle" src="{{ this.urlAvatar }}" alt="icon">
+			    </div>
+			    <div class="row-content">
+			        <h4 class="list-group-item-heading">{{ this.name }}</h4>
+			        <p class="list-group-item-text text-muted">{{ this.data.channel.address }}</p>
+			    </div>
+			    <i class="mdi-social-people pull-right"></i>
 			</div>
 			<div class="list-group-separator"></div>
 		{{/each}}

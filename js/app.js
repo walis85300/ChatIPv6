@@ -1,6 +1,7 @@
 var Chat = require('chatty');
 var client = new Chat.Client();
 var clientCacheInterval = undefined;
+client.findServer();
 
 client.on('listening', function(){
 
@@ -13,27 +14,25 @@ client.on('listening', function(){
 
 });
 
-
-client.on('client-cache-update', function(){
-
-	renderConversations(client.getClientCache());
-	removeEventClick();
-	addEventClick();
-
-});
-
-
-
 client.on('chat-message', function(uuid){
 
 	console.log(uuid);
 
 	if(uuid === _context.uuidContext)
 		renderMessages(uuid);
-	
-
 });
 
+client.on('client-cache-update', updateConversations);
+
+client.on('group-create', function(){
+	console.log('group created');
+	client.updateGroupCache();
+});
+
+client.on('group-cache-update',function(){
+	// client.updateGroupCache();
+	renderGroupConversations(client.getGroupCache());
+});
 // --------------------------
 // Copyright
 // Who property for the sender 0 me 1 other
@@ -43,6 +42,8 @@ client.on('chat-message', function(uuid){
 // 		Utils
 //
 // --------------------
+
+
 var _context = {
 	'uuidContext': 'aaa-bbb-ccc-1'
 }
@@ -88,12 +89,31 @@ function renderConversations(conversations){
 	var html = $('#conversations');
 	$('#box-conversations').html(_render({'conversations':conversations}, html));
 };
-
+function renderGroupConversations(conversations){
+	var html = $('#group-conversations');
+	$('#box-group-conversations').html(_render({'conversations':conversations}, html));
+};
 // --------------------
 //
 // 		UI 
 //
 // --------------------
+
+function createGroup(name){
+
+	client.createGroup(name);
+
+};
+
+function updateConversations() {
+
+	client.cleanClientCache();
+
+	renderConversations(client.getClientCache());
+	// renderGroupConversations(client.getGroupCache());
+	removeEventClick();
+	addEventClick();
+};
 
 function addEventClick() {
 	$('.list-group-item').click(function(event) {
