@@ -1,4 +1,4 @@
-var Chat = require('./node-chat-ipv6/lib/Chat');
+var Chat = require('chatty');
 var client = new Chat.Client();
 var clientCacheInterval = undefined;
 
