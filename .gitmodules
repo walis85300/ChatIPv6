@@ -1,3 +1,0 @@
-[submodule "node-chat-ipv6"]
-	path = node_modules/chatty-ipv6
-	url = https://github.com/DanielRS/node-chat-ipv6.git

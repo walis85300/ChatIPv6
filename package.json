@@ -4,7 +4,8 @@
   "description": "Chat over IPv6",
   "main": "index.html",
   "dependencies": {
-    "nw": "^0.12.2"
+    "nw": "^0.12.2",
+    "chatty": "DanielRS/node-chatty"
   },
   "devDependencies": {},
   "scripts": {
