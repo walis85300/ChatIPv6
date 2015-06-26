@@ -1,144 +1,44 @@
+var Chat = require('./node-chat-ipv6/lib/Chat');
+var client = new Chat.Client();
+var clientCacheInterval = undefined;
+
+client.on('listening', function(){
+
+	clientCacheInterval = setInterval(function(){
+
+		client.updateClientCache();
+
+
+	}, 1000);
+
+});
+
+
+client.on('client-cache-update', function(){
+
+	renderConversations(client.getClientCache());
+	removeEventClick();
+	addEventClick();
+
+});
+
+
+
+client.on('chat-message', function(uuid){
+
+	console.log(uuid);
+
+	if(uuid === _context.uuidContext)
+		renderMessages(uuid);
+
+	
+
+});
+
 // --------------------------
 // Copyright
 // Who property for the sender 0 me 1 other
 
-// Example array with chats
-var _arrayConversations = [
-// Converstaion 1
-	{
-		'uuid': 'aaa-bbb-ccc-1',
-		'urlAvatar': 'http://lorempixel.com/56/56/people/1',
-		'alias': 'Sandra',
-		'messages': [
-			{ 
-				'who': 0,
-				'message': 'Hello!',
-				'time': '12:02pm'
-			},
-			{ 
-				'who': 1,
-				'message': 'how you doing?',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'just waking up',
-				'time': '12:03pm'
-			}						
-		]
-	},
-	{
-		'uuid': 'aaa-bbb-ccc-2',
-		'urlAvatar': 'http://lorempixel.com/56/56/people/3',		
-		'alias': 'Daniel',
-		'messages': [
-			{ 
-				'who': 1,
-				'message': 'how you doing? ads das das das',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'Hello! dasd asd',
-				'time': '12:02pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'Hello! dasd asd',
-				'time': '12:02pm'
-			},
-			{ 
-				'who': 1,
-				'message': 'how you doing? ads das das das',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'just waking up das das das',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 1,
-				'message': 'how you doing? ads das das das',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'Hello! dasd asd',
-				'time': '12:02pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'Hello! dasd asd',
-				'time': '12:02pm'
-			},
-			{ 
-				'who': 1,
-				'message': 'how you doing? ads das das das',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'just waking up das das das',
-				'time': '12:03pm'
-			}								
-		]
-	},
-	{
-		'uuid': 'aaa-bbb-ccc-3',
-		'urlAvatar': 'http://lorempixel.com/56/56/people/4',		
-		'alias': 'David',
-		'messages': [
-			{ 
-				'who': 0,
-				'message': ' 123 1231 23Hello!',
-				'time': '12:02pm'
-			},
-			{ 
-				'who': 1,
-				'message': ' 3123123 how you doing?',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 0,
-				'message': ' 312312312 31just waking up',
-				'time': '12:03pm'
-			}						
-		]
-	},	
-	{
-		'uuid': 'aaa-bbb-ccc-4',
-		'urlAvatar': 'http://lorempixel.com/56/56/people/7',		
-		'alias': 'Mario',
-		'messages': [
-			{ 
-				'who': 1,
-				'message': 'how you doing? ads das das das',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'Hello! dasd asd',
-				'time': '12:02pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'Hello! dasd asd',
-				'time': '12:02pm'
-			},
-			{ 
-				'who': 1,
-				'message': 'how you doing? ads das das das',
-				'time': '12:03pm'
-			},
-			{ 
-				'who': 0,
-				'message': 'just waking up das das das',
-				'time': '12:03pm'
-			}						
-		]
-	},		
-];
 // --------------------
 //
 // 		Utils
@@ -163,19 +63,28 @@ function _render(context, htmlTarget){
 
 };
 
-function renderMessages(messages){
+function renderMessages(uuid){
+
+
+	messages = client.message_history;
+	messages = messages[uuid];
+
 	var htmlMessages = ''
 	var message;
 
-	for (var i = 0; i < messages.length; i++) {
-		if (messages[i].who === 0)
-			message = $('#bubble-me');
-		else 
-			message = $('#bubble-other');
-		htmlMessages += _render(messages[i],message);		
-	}
+	if (messages){
+		for (var i = 0; i < messages.length; i++) {
+			if (messages[i].sender.uuid === client._uuid)
+				message = $('#bubble-me');
+			else 
+				message = $('#bubble-other');
+			htmlMessages += _render(messages[i],message);		
+		}
 
-	$('#box-main').html(htmlMessages);
+		$('#box-main').html(htmlMessages);
+	} else {
+		$('#box-main').html("<h1 class='text-muted text-center'>No messages here :(</h1>");
+	}
 };
 
 function renderConversations(conversations){
@@ -198,13 +107,10 @@ function addEventClick() {
 
 		// Just validating
 		if (event.currentTarget === this){
-			// console.log(_uuid);
-			var id = searhConversation(_uuid);
-
-			var messages = _arrayConversations[id].messages;
 			
 			// Render heree
-			renderMessages(messages);
+			// messages = client.message_history;
+			renderMessages(_uuid);
 
 		}
 
@@ -216,13 +122,23 @@ function removeEventClick() {
 };
 
 $('#btn-send').click(function(event){
-	var message = $('#input-message').text();
+	var message = $('#input-message').val();
 	$('#input-message').val('');
 	
-	renderConversations(_arrayConversations);
+	// renderConversations(_arrayConversations);
 
-	// alert(_context.uuidContext);
+	client.sendMessage(_context.uuidContext, message);
+	console.log(message);
+
+	renderMessages(_context.uuidContext);
+	
 });
 
 removeEventClick();
 addEventClick();
+
+
+
+
+
+// $('#MyModal').modal('show');
