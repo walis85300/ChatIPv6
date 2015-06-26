@@ -45,8 +45,10 @@ client.on('group-cache-update',function(){
 
 
 var _context = {
-	'uuidContext': 'aaa-bbb-ccc-1'
+	'uuidContext': 'aaa-bbb-ccc-1',
+	'group': false
 }
+
 function searhConversation(uuid) {
 	for (var i = 0; i < _arrayConversations.length; i++) {
 		if ( _arrayConversations[i].uuid == uuid ) return i;
@@ -117,10 +119,12 @@ function updateConversations() {
 
 function addEventClick() {
 	$('.list-group-item').click(function(event) {
-		var _uuid = $(this).data().uuid
+		var _uuid = $(this).data().uuid,
+		 _isGroup = $(this).data().group;
 
 		// Change context
 		_context.uuidContext = _uuid;
+		_context.group = _isGroup;
 
 		// Just validating
 		if (event.currentTarget === this){
@@ -141,11 +145,16 @@ function removeEventClick() {
 function clickSend(){
 	var message = $('#input-message').val();
 	$('#input-message').val('');
-	
-	client.sendMessage(_context.uuidContext, message);
-	console.log(message);
+	if (message){
+		if (!_context.group)
+			client.sendMessage(_context.uuidContext, message);
+		else
+			client.sendGroupMessage(_context.uuidContext, message);
 
-	renderMessages(_context.uuidContext);
+		console.log(message);
+
+		renderMessages(_context.uuidContext);
+	}
 	
 }
 
