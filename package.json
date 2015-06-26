@@ -28,8 +28,8 @@
   "homepage": "https://github.com/walis85300/ChatIPv6",
 
   "window": {
-    // "toolbar": false
-    // "frame": false,
+    "toolbar": false,
+    "frame": false,
     "width": 980,
     "height": 580,
     "min_width": 980,

@@ -30,7 +30,6 @@ client.on('chat-message', function(uuid){
 
 	if(uuid === _context.uuidContext)
 		renderMessages(uuid);
-
 	
 
 });
@@ -49,8 +48,6 @@ var _context = {
 }
 function searhConversation(uuid) {
 	for (var i = 0; i < _arrayConversations.length; i++) {
-		console.log(_arrayConversations[i].uuid);
-		console.log(uuid);
 		if ( _arrayConversations[i].uuid == uuid ) return i;
 	}
 	return null;
@@ -121,18 +118,26 @@ function removeEventClick() {
 	$('.list-group-item').off();
 };
 
-$('#btn-send').click(function(event){
+function clickSend(){
 	var message = $('#input-message').val();
 	$('#input-message').val('');
 	
-	// renderConversations(_arrayConversations);
-
 	client.sendMessage(_context.uuidContext, message);
 	console.log(message);
 
 	renderMessages(_context.uuidContext);
 	
-});
+}
+
+$('#btn-send').click(clickSend);
+$('.form-group').keypress(function (e) {
+ var key = e.which;
+ if(key == 13)  // the enter key code
+  {
+    clickSend();
+    return false;  
+  }
+});   
 
 removeEventClick();
 addEventClick();
