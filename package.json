@@ -30,7 +30,7 @@
 
   "window": {
     "toolbar": false,
-    "frame": false,
+    "frame": true,
     "width": 980,
     "height": 580,
     "min_width": 980,
