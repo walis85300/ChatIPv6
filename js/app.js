@@ -8,7 +8,7 @@ client.on('listening', function(){
 	clientCacheInterval = setInterval(function(){
 
 		client.updateClientCache();
-
+		client.cleanClientCache();
 
 	}, 1000);
 
@@ -109,7 +109,7 @@ function createGroup(name){
 
 function updateConversations() {
 
-	client.cleanClientCache();
+	// client.cleanClientCache();
 
 	renderConversations(client.getClientCache());
 	// renderGroupConversations(client.getGroupCache());
