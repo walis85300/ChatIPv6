@@ -133,10 +133,11 @@ function addEventClick() {
 		var _uuid = $(this).data().uuid,
 		 _isGroup = $(this).data().group;
 
-		// Change context
-		_context.uuidContext = _uuid;
-		_context.group = _isGroup;
-
+		// Change context(
+				_context.uuidContext = _uuid;
+				_context.group = _isGroup;
+		if (_isGroup)
+			client.joinGroup(_uuid);
 		// Just validating
 		if (event.currentTarget === this){
 			
