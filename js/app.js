@@ -1,3 +1,5 @@
+
+
 var Chat = require('chatty');
 var client = new Chat.Client();
 var clientCacheInterval = undefined;
@@ -9,7 +11,7 @@ client.on('listening', function(){
 
 		client.updateClientCache();
 		client.cleanClientCache();
-
+		// client.updateGroupCache();
 	}, 1000);
 
 });
@@ -20,6 +22,7 @@ client.on('chat-message', function(uuid){
 
 	if(uuid === _context.uuidContext)
 		renderMessages(uuid);
+
 });
 
 client.on('group-message', function(sender, time, group_uuid, message){
@@ -96,9 +99,6 @@ function renderMessages(uuid){
 	$('#box-main').scrollTop($('#box-main')[0].scrollHeight + 200);
 };
 
-function renderGroupMessage(){
-
-}
 
 function renderConversations(conversations){
 	var html = $('#conversations');
@@ -165,8 +165,6 @@ function clickSend(){
 		else
 			client.sendGroupMessage(_context.uuidContext, message);
 
-		console.log(message);
-
 		renderMessages(_context.uuidContext);
 	}
 	
@@ -182,11 +180,31 @@ $('.form-group').keypress(function (e) {
   }
 });   
 
-removeEventClick();
-addEventClick();
 
+$('#modal-alias').modal({
+  keyboard: true
+});
 
+$('#alias-input').focus();
 
+$('#btn-alias').on('click',function(){
+	if(! ($('#alias-input').val() == '') ){
+		var alias = $('#alias-input').val();
+		client.setAlias(alias);
+		removeEventClick();
+		addEventClick();
+	}
+});
 
+$('#btn-createGroup').click(function(){
 
-// $('#MyModal').modal('show');
+	name = $('#groupName').val();
+	createGroup(name);
+	addEventClick();
+});
+
+$('#btn-saveCreateGroup').click(function(){
+	var nameGroup = $('#input-namegroup');
+	createGroup(nameGroup);
+	addEventClick();
+});
