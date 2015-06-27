@@ -71,6 +71,7 @@ function _render(context, htmlTarget){
 };
 
 function renderMessages(uuid){
+	
 
 
 	messages = client.message_history;
@@ -92,6 +93,7 @@ function renderMessages(uuid){
 	} else {
 		$('#box-main').html("<h1 class='text-muted text-center'>No messages here :(</h1>");
 	}
+	$('#box-main').scrollTop($('#box-main')[0].scrollHeight + 200);
 };
 
 function renderGroupMessage(){
