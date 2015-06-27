@@ -22,6 +22,13 @@ client.on('chat-message', function(uuid){
 		renderMessages(uuid);
 });
 
+client.on('group-message', function(sender, time, group_uuid, message){
+
+	if(group_uuid === _context.uuidContext)
+		renderMessages(group_uuid);
+
+})
+
 client.on('client-cache-update', updateConversations);
 
 client.on('group-create', function(){
@@ -86,6 +93,10 @@ function renderMessages(uuid){
 		$('#box-main').html("<h1 class='text-muted text-center'>No messages here :(</h1>");
 	}
 };
+
+function renderGroupMessage(){
+
+}
 
 function renderConversations(conversations){
 	var html = $('#conversations');

@@ -78,8 +78,8 @@
 	<script id="bubble-me" type="text/x-handlebars-template">
 		<div class="bs-component">
             <div class="alert alert-dismissable alert-info float-right">
+	            <div><strong>{{sender.alias}}:</strong></div>
             	{{ message }}
-
             </div>
 		</div>	
 	</script>
@@ -87,6 +87,7 @@
 	<script id="bubble-other" type="text/x-handlebars-template">
 		<div class="bs-component">
             <div class="alert alert-dismissable alert-danger float-left">
+            	<div><strong>{{sender.alias}}:</strong></div>
 				{{ message }}
             </div>
 		</div>	
