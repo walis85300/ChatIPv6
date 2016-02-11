@@ -4,7 +4,7 @@
   "description": "Chat over IPv6",
   "main": "index.html",
   "dependencies": {
-    "nw": "^0.12.2",
+    "nw": "0.12.2",
     "chatty": "DanielRS/node-chatty"
   },
   "devDependencies": {},
@@ -29,7 +29,7 @@
   "homepage": "https://github.com/walis85300/ChatIPv6",
 
   "window": {
-    "toolbar": false,
+    "toolbar": true,
     "frame": true,
     "width": 980,
     "height": 580,
